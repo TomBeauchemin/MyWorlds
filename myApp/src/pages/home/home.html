@@ -1,0 +1,17 @@
+<ion-header>
+  <ion-navbar>
+    <button class="button" style="float:right; font-size:300%" ng-click="doSomething()">
+        Create Group
+    </button>
+  </ion-navbar>
+</ion-header>
+
+<body ng-controller="MyCtrl">
+  <ion-content padding>
+    <ion-list>
+      <ion-item ng-repeat="item in items">
+        Hello, {{item}}!
+      </ion-item>
+    </ion-list>
+  </ion-content>
+</body>

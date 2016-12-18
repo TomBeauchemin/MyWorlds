@@ -1,17 +1,27 @@
-<ion-header>
-  <ion-navbar>
-    <button class="button" style="float:right; font-size:300%" ng-click="doSomething()">
-        Create Group
-    </button>
-  </ion-navbar>
-</ion-header>
+<html ng-app="myApp">
+  <ion-header ng-controller="PopupCtrl">
+    <ion-navbar>
+      <button class="button" ng-click="loginForm()">
+          Login
+      </button>
+      <button class="button" ng-click="createGroup()">
+          Create Group
+      </button>
 
-<body ng-controller="MyCtrl">
-  <ion-content padding>
-    <ion-list>
-      <ion-item ng-repeat="item in items">
-        Hello, {{item}}!
-      </ion-item>
-    </ion-list>
-  </ion-content>
-</body>
+      <script id="popup-template.html" type="text/ng-template">
+        <input ng-model="data.wifi" type="text" placeholder="Password">
+      </script>
+
+    </ion-navbar>
+  </ion-header>
+
+  <body ng-controller="MyCtrl">
+    <ion-content padding>
+      <ion-list>
+        <ion-item ng-repeat="item in items">
+          Hello, {{item}}!
+        </ion-item>
+      </ion-list>
+    </ion-content>
+  </body>
+</html>

@@ -2,24 +2,24 @@ import { Component } from '@angular/core';
 import { NavController, NavParams } from 'ionic-angular';
 
 /*
-  Generated class for the Group page.
+  Generated class for the Event page.
 
   See http://ionicframework.com/docs/v2/components/#navigation for more info on
   Ionic pages and navigation.
 */
 @Component({
-  selector: 'page-group',
-  templateUrl: 'group.html'
+  selector: 'page-event',
+  templateUrl: 'event.html'
 })
-export class GroupPage {
+export class EventPage {
 
-  public groupName:any;
+  public eventName:any;
   constructor(public navCtrl: NavController, public navParams: NavParams) {
-  	this.groupName = navParams.get('groupName');
+  	this.eventName = navParams.get('eventName');
   }
 
   ionViewDidLoad() {
-    console.log('ionViewDidLoad GroupPage');
+    console.log('ionViewDidLoad EventPage');
   }
 
 }

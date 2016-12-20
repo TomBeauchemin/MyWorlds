@@ -1,6 +1,8 @@
 import { Component } from '@angular/core';
 
-import { NavController, ViewController, AlertController } from 'ionic-angular';
+import { App, NavController, ViewController, AlertController } from 'ionic-angular';
+
+import {EventPage} from '../event/event'
 
 
 @Component({
@@ -9,7 +11,10 @@ import { NavController, ViewController, AlertController } from 'ionic-angular';
 })
 export class AboutPage {
 
-  constructor(public navCtrl: NavController, public alerCtrl: AlertController) {
+  constructor (
+    public navCtrl: NavController, 
+    public alerCtrl: AlertController, 
+    public appCtrl: App) {
   }
 
   loginForm() {
@@ -18,11 +23,11 @@ export class AboutPage {
       inputs: [
       	{
       		name: 'Username',
-      		placeholder: 'username'
+      		placeholder: 'Username'
       	},
       	{
       		name: 'Password',
-      		placeholder: 'password'
+      		placeholder: 'Password'
       	}
       ],
       buttons: [
@@ -39,27 +44,27 @@ export class AboutPage {
 
   createEvent() {
     let alert = this.alerCtrl.create({
-      title: 'Create Group',
+      title: 'Create Event',
       inputs: [
       	{
       		name: 'Name of Event',
-      		placeholder: 'Dinner at Ruby\'s'
+      		placeholder: 'Name of Event'
       	},
       	{
       		name: 'Event Date',
-      		placeholder: '12/16/2107'
-      	},
-      	{
-      		name: 'Location',
-      		placeholder: '1234 Rose St'
+      		placeholder: 'Event Date'
       	},
       	{
       		name: 'Event Time',
-      		placeholder: '7:30-9:30'
+      		placeholder: 'Event Time'
+      	},
+      	{
+      		name: 'Location',
+      		placeholder: 'Location'
       	},
       	{
       		name: 'Description',
-      		placeholder: 'Let\'s get together!'
+      		placeholder: 'Description'
       	}
       ],
       buttons: [
@@ -95,7 +100,9 @@ export class AboutPage {
   ];
 
   itemSelected(item: string) {
-    console.log("Selected Item", item);
+    this.appCtrl.getRootNav().push(EventPage, {
+      eventName: item
+    });
   }
 
 }

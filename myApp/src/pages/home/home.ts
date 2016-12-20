@@ -1,6 +1,6 @@
 import { Component } from '@angular/core';
 
-import { NavController, ViewController, AlertController } from 'ionic-angular';
+import { App, NavController, ViewController, AlertController } from 'ionic-angular';
 
 import {GroupPage} from '../group/group'
 
@@ -10,9 +10,11 @@ import {GroupPage} from '../group/group'
   templateUrl: 'home.html'
 })
 export class HomePage {
-  groupPage = GroupPage;
 
-  constructor(public navCtrl: NavController, public alerCtrl: AlertController) {
+  constructor (
+  	public navCtrl: NavController, 
+  	public alerCtrl: AlertController, 
+  	public appCtrl: App) {
   }
 
   loginForm() {
@@ -21,11 +23,11 @@ export class HomePage {
       inputs: [
       	{
       		name: 'Username',
-      		placeholder: 'username'
+      		placeholder: 'Username'
       	},
       	{
       		name: 'Password',
-      		placeholder: 'password'
+      		placeholder: 'Password'
       	}
       ],
       buttons: [
@@ -46,7 +48,7 @@ export class HomePage {
       inputs: [
       	{
       		name: 'Name of Group',
-      		placeholder: 'Princeton Class of 2017'
+      		placeholder: 'Name of Group'
       	}
       ],
       buttons: [
@@ -82,7 +84,9 @@ export class HomePage {
   ];
 
   itemSelected(item: string) {
-    console.log("Selected Item", item);
+   this.appCtrl.getRootNav().push(GroupPage, {
+   	groupName: item
+   });
   }
 
 }

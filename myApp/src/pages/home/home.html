@@ -1,27 +1,25 @@
-<html ng-app="myApp">
-  <ion-header ng-controller="PopupCtrl">
-    <ion-navbar>
-      <button class="button" ng-click="loginForm()">
-          Login
+
+  <ion-navbar>
+    <ion-title>
+      Groups
+    </ion-title>
+    <button class="button" (click)="loginForm()">
+        Login
+    </button>
+    <button class="button" (click)="createGroup()">
+        Create Group
+    </button>
+  </ion-navbar>
+
+
+
+
+<body>
+  <ion-content padding>
+    <ion-list>
+      <button [navPush]="groupPage" ion-item *ngFor="let item of items" (click)="itemSelected(item)">
+        {{ item }}
       </button>
-      <button class="button" ng-click="createGroup()">
-          Create Group
-      </button>
-
-      <script id="popup-template.html" type="text/ng-template">
-        <input ng-model="data.wifi" type="text" placeholder="Password">
-      </script>
-
-    </ion-navbar>
-  </ion-header>
-
-  <body ng-controller="MyCtrl">
-    <ion-content padding>
-      <ion-list>
-        <ion-item ng-repeat="item in items">
-          Hello, {{item}}!
-        </ion-item>
-      </ion-list>
-    </ion-content>
-  </body>
-</html>
+    </ion-list>
+  </ion-content>
+</body>

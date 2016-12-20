@@ -1,11 +1,25 @@
-<ion-header>
+
   <ion-navbar>
     <ion-title>
-      About
+      Events
     </ion-title>
+    <button class="button" (click)="loginForm()">
+        Login
+    </button>
+    <button class="button" (click)="createEvent()">
+        Create Event
+    </button>
   </ion-navbar>
-</ion-header>
 
-<ion-content padding>
 
-</ion-content>
+
+
+<body>
+  <ion-content padding>
+    <ion-list>
+      <button ion-item *ngFor="let item of items" (click)="itemSelected(item)">
+        {{ item }}
+      </button>
+    </ion-list>
+  </ion-content>
+</body>

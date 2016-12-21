@@ -2,6 +2,8 @@ import { Component } from '@angular/core';
 
 import { App, NavController, ViewController, AlertController } from 'ionic-angular';
 
+import { AuthService } from '../../providers/auth-service';
+import { LoginPage } from '../login/login';
 import {GroupPage} from '../group/group'
 
 
@@ -10,36 +12,24 @@ import {GroupPage} from '../group/group'
   templateUrl: 'home.html'
 })
 export class HomePage {
+  username = '';
+  email = '';
 
   constructor (
   	public navCtrl: NavController, 
   	public alerCtrl: AlertController, 
-  	public appCtrl: App) {
+  	public appCtrl: App,
+    private auth: AuthService) {
+
+    let info = this.auth.getUserInfo();
+    this.username = info.name;
+    this.email = info.email;
   }
 
-  loginForm() {
-    let alert = this.alerCtrl.create({
-      title: 'Login',
-      inputs: [
-      	{
-      		name: 'Username',
-      		placeholder: 'Username'
-      	},
-      	{
-      		name: 'Password',
-      		placeholder: 'Password'
-      	}
-      ],
-      buttons: [
-      	{
-      		text: 'Ok'
-      	},
-      	{
-      		text: 'Cancel'
-      	}
-      ]
+  public logout() {
+    this.auth.logout().subscribe(succ => {
+        this.appCtrl.getRootNav().setRoot(LoginPage)
     });
-    alert.present()
   }
 
   createGroup() {

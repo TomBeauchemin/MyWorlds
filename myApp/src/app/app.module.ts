@@ -7,6 +7,9 @@ import { HomePage } from '../pages/home/home';
 import { GroupPage } from '../pages/group/group';
 import { EventPage } from '../pages/event/event';
 import { TabsPage } from '../pages/tabs/tabs';
+import { LoginPage } from '../pages/login/login';
+import { AuthService } from '../providers/auth-service';
+import { RegisterPage } from '../pages/register/register';
 
 @NgModule({
   declarations: [
@@ -16,7 +19,9 @@ import { TabsPage } from '../pages/tabs/tabs';
     HomePage,
     GroupPage,
     EventPage,
-    TabsPage
+    TabsPage,
+    LoginPage,
+    RegisterPage
   ],
   imports: [
     IonicModule.forRoot(MyApp)
@@ -29,8 +34,10 @@ import { TabsPage } from '../pages/tabs/tabs';
     HomePage,
     GroupPage,
     EventPage,
-    TabsPage
+    TabsPage,
+    LoginPage,
+    RegisterPage
   ],
-  providers: [{provide: ErrorHandler, useClass: IonicErrorHandler}]
+  providers: [{provide: ErrorHandler, useClass: IonicErrorHandler}, AuthService]
 })
 export class AppModule {}

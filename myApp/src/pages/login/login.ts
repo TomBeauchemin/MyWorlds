@@ -1,63 +1,74 @@
+import { 
+  NavController, 
+  LoadingController, 
+  AlertController } from 'ionic-angular';
 import { Component } from '@angular/core';
-import { NavController, AlertController, LoadingController, Loading } from 'ionic-angular';
+import { FormBuilder, Validators } from '@angular/forms';
 import { AuthService } from '../../providers/auth-service';
 import { RegisterPage } from '../register/register';
-import { TabsPage } from '../tabs/tabs';
- 
+import { 
+TabsPage } from '../tabs/tabs';
+import { ResetPasswordPage } from '../reset-password/reset-password';
+
 @Component({
   selector: 'page-login',
-  templateUrl: 'login.html'
+  templateUrl: 'login.html',
 })
 export class LoginPage {
-  loading: Loading;
-  registerCredentials = {email: '', password: ''};
- 
-  constructor(private nav: NavController, private auth: AuthService, private alertCtrl: AlertController, private loadingCtrl: LoadingController) {}
- 
-  public createAccount() {
+  public loginForm;
+  emailChanged: boolean = false;
+  passwordChanged: boolean = false;
+  submitAttempt: boolean = false;
+  loading: any;
+
+  constructor(public nav: NavController, public authData: AuthService, public formBuilder: FormBuilder,
+    public alertCtrl: AlertController, public loadingCtrl: LoadingController) {
+
+    this.loginForm = formBuilder.group({
+      email: ['', Validators.compose([Validators.required])],
+      password: ['', Validators.compose([Validators.minLength(6), Validators.required])]
+    });
+  }
+
+  elementChanged(input){
+    let field = input.inputControl.name;
+    this[field + "Changed"] = true;
+  }
+
+
+  loginUser() {
+    this.submitAttempt = true;
+
+    if (!this.loginForm.valid){
+      console.log(this.loginForm.value);
+    } else {
+      this.authData.loginUser(this.loginForm.value.email, this.loginForm.value.password).then( authData => {
+        this.nav.setRoot(TabsPage);
+      }, error => {
+        this.loading.dismiss().then( () => {
+          let alert = this.alertCtrl.create({
+            message: error.message,
+            buttons: [
+              {
+                text: "Ok",
+                role: 'cancel'
+              }
+            ]
+          });
+          alert.present();
+        });
+      });
+
+      this.loading = this.loadingCtrl.create({});
+    }
+  }
+
+  goToSignup(){
     this.nav.push(RegisterPage);
   }
- 
-  public login() {
-    this.showLoading()
-    this.auth.login(this.registerCredentials).subscribe(allowed => {
-      setTimeout(() => {
-      this.loading.dismiss();
-      this.nav.setRoot(TabsPage)});
-      /*if (allowed) {
-        setTimeout(() => {
-        this.loading.dismiss();
-        this.nav.setRoot(TabsPage)
-        });
-      } else {
-        this.showError("Access Denied");
-      }*/
-    },
-    error => {
-      setTimeout(() => {
-      this.loading.dismiss();
-      this.nav.setRoot(TabsPage)});
-      //this.showError(error);
-    });
+
+  goToResetPassword(){
+    this.nav.push(ResetPasswordPage);
   }
- 
-  showLoading() {
-    this.loading = this.loadingCtrl.create({
-      content: 'Please wait...'
-    });
-    this.loading.present();
-  }
- 
-  showError(text) {
-    setTimeout(() => {
-      this.loading.dismiss();
-    });
- 
-    let alert = this.alertCtrl.create({
-      title: 'Fail',
-      subTitle: text,
-      buttons: ['OK']
-    });
-    alert.present(prompt);
-  }
+
 }

@@ -1,57 +1,33 @@
 import { Injectable } from '@angular/core';
-import {Observable} from 'rxjs/Observable';
-import 'rxjs/add/operator/map';
 
-export class User {
-  name: string;
-  email: string;
- 
-  constructor(name: string, email: string) {
-    this.name = name;
-    this.email = email;
-  }
-}
+import firebase from 'firebase';
 
 @Injectable()
 export class AuthService {
-  currentUser: User;
+  public fireAuth: any;
+  public userProfile: any;
+  constructor() {
+    this.fireAuth = firebase.auth();
+    this.userProfile = firebase.database().ref('/userProfile');
+  }
 
-  public login(credentials) {
-    if (credentials.email === null || credentials.password === null) {
-      return Observable.throw("Please insert credentials");
-    } else {
-      return Observable.create(observer => {
-        // At this point make a request to your backend to make a real check!
-        let access = (credentials.password === "pass" && credentials.email === "email");
-        this.currentUser = new User('Simon', 'saimon@devdactic.com');
-        observer.next(access);
-        observer.complete();
+  loginUser(email: string, password: string): any {
+    return this.fireAuth.signInWithEmailAndPassword(email, password);
+  }
+ 
+  signupUser(email: string, password: string): any {
+    return this.fireAuth.createUserWithEmailAndPassword(email, password)
+      .then((newUser) => {
+        this.userProfile.child(newUser.uid).set({email: email});
       });
-    }
   }
  
-  public register(credentials) {
-    if (credentials.email === null || credentials.password === null) {
-      return Observable.throw("Please insert credentials");
-    } else {
-      // At this point store the credentials to your backend!
-      return Observable.create(observer => {
-        observer.next(true);
-        observer.complete();
-      });
-    }
+  resetPassword(email: string): any {
+    return this.fireAuth.sendPasswordResetEmail(email);
   }
- 
-  public getUserInfo() : User {
-    return this.currentUser;
-  }
- 
-  public logout() {
-    return Observable.create(observer => {
-      this.currentUser = null;
-      observer.next(true);
-      observer.complete();
-    });
+
+  logoutUser(): any {
+    return this.fireAuth.signOut();
   }
 
 }

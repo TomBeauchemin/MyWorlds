@@ -10,6 +10,7 @@ import { TabsPage } from '../pages/tabs/tabs';
 import { LoginPage } from '../pages/login/login';
 import { AuthService } from '../providers/auth-service';
 import { RegisterPage } from '../pages/register/register';
+import { ResetPasswordPage } from '../pages/reset-password/reset-password';
 
 @NgModule({
   declarations: [
@@ -21,7 +22,8 @@ import { RegisterPage } from '../pages/register/register';
     EventPage,
     TabsPage,
     LoginPage,
-    RegisterPage
+    RegisterPage,
+    ResetPasswordPage
   ],
   imports: [
     IonicModule.forRoot(MyApp)
@@ -36,7 +38,8 @@ import { RegisterPage } from '../pages/register/register';
     EventPage,
     TabsPage,
     LoginPage,
-    RegisterPage
+    RegisterPage,
+    ResetPasswordPage
   ],
   providers: [{provide: ErrorHandler, useClass: IonicErrorHandler}, AuthService]
 })

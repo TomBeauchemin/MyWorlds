@@ -37,5 +37,19 @@
   <!-- The bundle js is generated during the build process -->
   <script src="build/main.js"></script>
 
+  
+  <script src="https://www.gstatic.com/firebasejs/3.6.4/firebase.js"></script>
+  <script>
+    // Initialize Firebase
+    var config = {
+      apiKey: "AIzaSyD0kMTqGwSITp2GqUTrmKu-2qDtHo2RY9U",
+      authDomain: "myworlds-86018.firebaseapp.com",
+      databaseURL: "https://myworlds-86018.firebaseio.com",
+      storageBucket: "myworlds-86018.appspot.com",
+      messagingSenderId: "924040767223"
+    };
+    firebase.initializeApp(config);
+  </script>
+
 </body>
 </html>

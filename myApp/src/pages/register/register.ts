@@ -47,19 +47,22 @@ export class RegisterPage {
     } else {
       this.authData.signupUser(this.signupForm.value.email, this.signupForm.value.password).then(() => {
         this.nav.setRoot(TabsPage);
-      }, (error) => {
-        this.loading.dismiss();
-        let alert = this.alertCtrl.create({
-          message: error.message,
-          buttons: [
-            {
-              text: "Ok",
-              role: 'cancel'
-            }
-          ]
+      }, error => {
+        this.loading.dismiss().then( () => {
+          let alert = this.alertCtrl.create({
+            message: error.message,
+            buttons: [
+              {
+                text: "Ok",
+                role: 'cancel'
+              }
+            ]
+          });
+          alert.present();
         });
-        alert.present();
       });
+
+      this.loading = this.loadingCtrl.create({});
     }
   }
 }

@@ -1,5 +1,4 @@
 import { Injectable } from '@angular/core';
-
 import firebase from 'firebase';
 
 @Injectable()
@@ -18,7 +17,7 @@ export class AuthService {
   signupUser(email: string, password: string): any {
     return this.fireAuth.createUserWithEmailAndPassword(email, password)
       .then((newUser) => {
-        this.userProfile.child(newUser.uid).set({email: email});
+        this.userProfile.child(email.replace('.', ',')).set({email: email, uid: newUser.uid});
       });
   }
  

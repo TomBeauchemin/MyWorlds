@@ -1,16 +1,19 @@
 <ion-navbar>
-	<ion-title>{{groupName.name}}</ion-title>
+	<ion-title>{{group?.name}}</ion-title>
 	<button class="button" (click)="createEvent()">
 	  Create Event
 	</button>
+  <button class="button" (click)="invitePeople()">
+    Invite People
+  </button>
 </ion-navbar>
 
 
 <body>
   <ion-content padding>
-    <ion-list>
-      <button ion-item *ngFor="let item of groupName.events" (click)="itemSelected(item)">
-        {{ item.name }}
+  	<ion-list>
+      <button ion-item *ngFor="let event of eventList" (click)="itemSelected(event?.id)">
+        {{ event?.name }}
       </button>
     </ion-list>
   </ion-content>

@@ -43,7 +43,7 @@ export class LoginPage {
       console.log(this.loginForm.value);
     } else {
       this.authData.loginUser(this.loginForm.value.email, this.loginForm.value.password).then( authData => {
-        this.nav.setRoot(TabsPage);
+        this.nav.push(TabsPage);
       }, error => {
         this.loading.dismiss().then( () => {
           let alert = this.alertCtrl.create({

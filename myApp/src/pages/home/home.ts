@@ -57,7 +57,7 @@ export class HomePage {
       	{
       		text: 'Ok',
           handler: formData => {
-            this.writeNewGroup(formData.groupname, firebase.auth().currentUser.email, firebase.auth().currentUser.uid, []);
+            this.writeNewGroup(formData.groupname, firebase.auth().currentUser.email, firebase.auth().currentUser.uid);
           }
       	},
       	{
@@ -75,12 +75,11 @@ export class HomePage {
    });
   }
 
-  writeNewGroup(name, username, uid, members) {
+  writeNewGroup(name, username, uid) {
     // A post entry.
     var groupData = {
       author: username,
-      name: name,
-      members: members
+      name: name
     };
 
     // Get a key for a new Group.

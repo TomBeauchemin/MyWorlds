@@ -30,7 +30,8 @@ export class GroupPage {
       this.zone.run(() => {
         let raw = {
           id: snapshot.key,
-          name: snapshot.val().name
+          name: snapshot.val().name,
+          author: snapshot.val().author
         };
         this.group = raw;
       });
@@ -97,6 +98,35 @@ export class GroupPage {
     alert.present()
   }
 
+  invitePeople() {
+    let alert = this.alerCtrl.create({
+      title: 'Add member',
+      message: this.group.name,
+      inputs: [
+        {
+          name: 'name',
+          placeholder: 'Full Name'
+        },
+        {
+          name: 'email',
+          placeholder: 'Email Address'
+        }
+      ],
+      buttons: [
+        {
+          text: 'Ok',
+          handler: formData => {
+            this.addNewMember(formData.email, this.group.name, this.group.author, this.groupId);
+          }
+        },
+        {
+          text: 'Cancel'
+        }
+      ]
+    });
+    alert.present()
+  }
+
   itemSelected(item: string) {
     this.appCtrl.getRootNav().push(EventPage, {
       eventId: item,
@@ -121,6 +151,28 @@ export class GroupPage {
     updates['/groups/' + this.groupId + '/events/' + newGroupKey] = eventData;
 
     return firebase.database().ref().update(updates);
+  }
+
+  addNewMember(email, name, author, groupId) {
+    var user = firebase.database().ref(
+    'userProfile/' + email.replace('.', ',') + '/uid');
+    user.on('value', function(data) {
+      if (data !== null) {
+        var groupData = {
+          author: author,
+          name: name
+        };
+
+        var updates = {};
+        updates['/user-groups/' + data.val() + '/' + groupId] = groupData;
+        return firebase.database().ref().update(updates);
+      }
+
+      else {
+
+      }
+    });
+    
   }
 
 }

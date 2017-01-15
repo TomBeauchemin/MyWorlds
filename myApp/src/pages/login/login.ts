@@ -45,9 +45,9 @@ export class LoginPage {
     if (!this.loginForm.valid){
       console.log(this.loginForm.value);
     } else {
-      this.locationTracker.startTracking();
       this.authData.loginUser(this.loginForm.value.email, this.loginForm.value.password).then( authData => {
         this.nav.push(TabsPage);
+        this.locationTracker.startTracking();
       }, error => {
         this.loading.dismiss().then( () => {
           let alert = this.alertCtrl.create({

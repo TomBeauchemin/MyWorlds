@@ -4,8 +4,8 @@ import { App, NavController, ViewController, AlertController } from 'ionic-angul
 
 import { AuthService } from '../../providers/auth-service';
 import { LoginPage } from '../login/login';
-import {EventPage} from '../event/event'
-import {GroupData} from '../../providers/group-data';
+import { EventPage } from '../event/event'
+import { GroupData } from '../../providers/group-data';
 
 @Component({
   selector: 'page-about',

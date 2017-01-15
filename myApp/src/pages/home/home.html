@@ -13,7 +13,7 @@
 <body>
   <ion-content padding>
     <ion-list>
-      <button ion-item *ngFor="let group of groupList" (click)="itemSelected(group?.id)">
+      <button ion-item *ngFor="let group of groupList" (click)="itemSelected(group?.id)"> <!--segue-->
         {{ group?.name }}
       </button>
     </ion-list>

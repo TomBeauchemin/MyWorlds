@@ -5,6 +5,7 @@ import firebase from 'firebase';
 export class AuthService {
   public fireAuth: any;
   public userProfile: any;
+  
   constructor() {
     this.fireAuth = firebase.auth();
     this.userProfile = firebase.database().ref('/userProfile');

@@ -18,5 +18,4 @@ export class GroupData {
   getGroupDetail(groupId): any {
     return this.groupList.child(groupId);
   }
-
 }

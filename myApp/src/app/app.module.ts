@@ -10,6 +10,7 @@ import { TabsPage } from '../pages/tabs/tabs';
 import { LoginPage } from '../pages/login/login';
 import { AuthService } from '../providers/auth-service';
 import { GroupData } from '../providers/group-data';
+import { LocationTracker } from '../providers/location-tracker';
 import { RegisterPage } from '../pages/register/register';
 import { ResetPasswordPage } from '../pages/reset-password/reset-password';
 
@@ -42,6 +43,6 @@ import { ResetPasswordPage } from '../pages/reset-password/reset-password';
     RegisterPage,
     ResetPasswordPage
   ],
-  providers: [{provide: ErrorHandler, useClass: IonicErrorHandler}, AuthService, GroupData]
+  providers: [{provide: ErrorHandler, useClass: IonicErrorHandler}, AuthService, GroupData, LocationTracker]
 })
 export class AppModule {}

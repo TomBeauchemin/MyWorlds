@@ -9,7 +9,6 @@ import { EventPage } from '../event/event';
 })
 export class GroupPage {
   public eventList: any;
-
   public groupId:any;
   public group:any;
   public events:any;

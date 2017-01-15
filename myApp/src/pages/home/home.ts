@@ -6,6 +6,7 @@ import { AuthService } from '../../providers/auth-service';
 import { LoginPage } from '../login/login';
 import { GroupPage } from '../group/group';
 import { GroupData } from '../../providers/group-data';
+import { LocationTracker } from '../../providers/location-tracker';
 
 import firebase from 'firebase';
 
@@ -21,7 +22,8 @@ export class HomePage {
   	public alerCtrl: AlertController, 
   	public appCtrl: App,
     private auth: AuthService,
-    private groupData: GroupData) {
+    private groupData: GroupData,
+    public locationTracker: LocationTracker) {
     this.groupData = groupData;
 
     this.groupData.getGroupList().on('value', snapshot => {
@@ -38,6 +40,7 @@ export class HomePage {
   }
 
   logout(){
+    this.locationTracker.stopTracking();
     this.auth.logoutUser().then(() => {
       this.appCtrl.getRootNav().push(LoginPage)
     });
@@ -68,7 +71,7 @@ export class HomePage {
     alert.present()
   }
 
-
+  // Navigation 
   itemSelected(item) {
    this.appCtrl.getRootNav().push(GroupPage, {
    	group: item

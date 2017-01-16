@@ -25,7 +25,11 @@ export class EventPage {
       this.zone.run(() => {
         let raw = {
           id: snapshot.key,
-          name: snapshot.val().name
+          name: snapshot.val().name,
+          location: snapshot.val().location,
+          description: snapshot.val().description,
+          dateTime: snapshot.val().dateTime,
+          author: snapshot.val().author
         };
         this.event = raw;
       });

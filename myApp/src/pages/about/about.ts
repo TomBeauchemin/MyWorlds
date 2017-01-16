@@ -6,6 +6,7 @@ import { AuthService } from '../../providers/auth-service';
 import { LoginPage } from '../login/login';
 import { EventPage } from '../event/event'
 import { GroupData } from '../../providers/group-data';
+import { CreateEventPage } from '../create-event/create-event';
 
 @Component({
   selector: 'page-about',
@@ -65,44 +66,11 @@ export class AboutPage {
   }
 
   createEvent(data) {
-    let alert = this.alerCtrl.create({
-      title: 'Create Event',
-      message: data.name,
-      inputs: [
-        {
-          name: 'name',
-          placeholder: 'Name of Event'
-        },
-        {
-          name: 'date',
-          placeholder: 'Event Date'
-        },
-        {
-          name: 'time',
-          placeholder: 'Event Time'
-        },
-        {
-          name: 'location',
-          placeholder: 'Location'
-        },
-        {
-          name: 'description',
-          placeholder: 'Description'
-        }
-      ],
-      buttons: [
-        {
-          text: 'Ok',
-          handler: formData => {
-            this.writeNewEvent(formData.name, this.groupSelected.id, firebase.auth().currentUser.email, firebase.auth().currentUser.uid, formData.date, formData.time, formData.location, formData.description);
-          }
-        },
-        {
-          text: 'Cancel'
-        }
-      ]
+    let me = this;
+    console.log(this.groupSelected.id);
+    this.appCtrl.getRootNav().push(CreateEventPage, {
+      groupId: me.groupSelected.id
     });
-    alert.present()
   }
 
   public doRadio() {

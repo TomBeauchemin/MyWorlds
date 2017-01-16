@@ -1,11 +1,11 @@
-<ion-navbar hideBackButton="true">
-  <ion-title>
+<ion-navbar hideBackButton="true" color="primary">
+  <h1 style="display: inline; color: white; margin-left: 10px; vertical-align:middle;">
     Groups
-  </ion-title>
-  <button class="button" (click)="logout()">
+  </h1>
+  <button ion-button color="light" clear (click)="logout()">
       Logout
   </button>
-  <button class="button" (click)="createGroup()">
+  <button ion-button color="light" clear (click)="createGroup()">
       Create Group
   </button>
 </ion-navbar>

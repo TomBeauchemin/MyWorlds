@@ -6,13 +6,27 @@
 -->
 <ion-header>
 
-  <ion-navbar>
-    <ion-title>{{event?.name}}</ion-title>
+  <ion-navbar color="primary">
+  	<h1 style="display: inline; color: white; margin-left: 10px; margin-top: 20px">
+    {{event?.name}}
+  </h1>
   </ion-navbar>
 
 </ion-header>
 
 
 <ion-content padding>
+	<ion-item>
+      Event description: {{event?.description}}
+    </ion-item>
+    <ion-item>
+      Event time: {{event?.dateTime}}
+    </ion-item>
+    <ion-item>
+      Event location: {{event?.location}}
+    </ion-item>
+    <ion-item>
+      Event creator: {{event?.author}}
+    </ion-item>
 
 </ion-content>

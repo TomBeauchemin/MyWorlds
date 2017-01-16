@@ -1,9 +1,11 @@
-<ion-navbar>
-	<ion-title>{{group?.name}}</ion-title>
-	<button class="button" (click)="createEvent()">
+<ion-navbar color="primary">
+  <h1 style="display: inline; color: white; margin-left: 10px; margin-top: 20px">
+    {{group?.name}}
+  </h1>
+	<button ion-button color="light" clear (click)="createEvent()">
 	  Create Event
 	</button>
-  <button class="button" (click)="invitePeople()">
+  <button ion-button color="light" clear (click)="invitePeople()">
     Invite People
   </button>
 </ion-navbar>

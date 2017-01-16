@@ -9,6 +9,7 @@ import { RegisterPage } from '../register/register';
 import { TabsPage } from '../tabs/tabs';
 import { ResetPasswordPage } from '../reset-password/reset-password';
 import { LocationTracker } from '../../providers/location-tracker';
+import { MapViewPage } from '../map-view/map-view';
 
 @Component({
   selector: 'page-login',

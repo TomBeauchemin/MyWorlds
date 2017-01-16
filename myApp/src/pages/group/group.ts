@@ -2,6 +2,7 @@ import { Component, NgZone } from '@angular/core';
 import { App, NavController, NavParams, AlertController } from 'ionic-angular';
 
 import { EventPage } from '../event/event';
+import { CreateEventPage } from '../create-event/create-event';
 
 @Component({
   selector: 'page-group',
@@ -57,44 +58,11 @@ export class GroupPage {
   }
 
   createEvent() {
-    let alert = this.alerCtrl.create({
-      title: 'Create Event',
-      message: this.group.name,
-      inputs: [
-        {
-          name: 'name',
-          placeholder: 'Name of Event'
-        },
-        {
-          name: 'date',
-          placeholder: 'Event Date'
-        },
-        {
-          name: 'time',
-          placeholder: 'Event Time'
-        },
-        {
-          name: 'location',
-          placeholder: 'Location'
-        },
-        {
-          name: 'description',
-          placeholder: 'Description'
-        }
-      ],
-      buttons: [
-        {
-          text: 'Ok',
-          handler: formData => {
-            this.writeNewEvent(formData.name, this.group.id, firebase.auth().currentUser.email, firebase.auth().currentUser.uid, formData.date, formData.time, formData.location, formData.description);
-          }
-        },
-        {
-          text: 'Cancel'
-        }
-      ]
+    let me = this;
+    console.log(this.groupId);
+    this.appCtrl.getRootNav().push(CreateEventPage, {
+      groupId: me.groupId
     });
-    alert.present()
   }
 
   invitePeople() {
@@ -131,25 +99,6 @@ export class GroupPage {
       eventId: item,
       groupId: this.groupId
     });
-  }
-
-  writeNewEvent(name, groupId, username, uid, eventDate, eventTime, location, description) {
-    var eventData = {
-      author: username,
-      name: name,
-      eventDate: eventDate,
-      eventTime: eventTime,
-      location: location,
-      description: description,
-    };
-
-    // Get a key for a new Group.
-    var newGroupKey = firebase.database().ref().child('groups/' + groupId).push().key;
-
-    var updates = {};
-    updates['/groups/' + this.groupId + '/events/' + newGroupKey] = eventData;
-
-    return firebase.database().ref().update(updates);
   }
 
   addNewMember(email, name, author, groupId) {

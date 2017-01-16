@@ -70,7 +70,6 @@ export class LocationTracker {
   }
 
   stopTracking() {
-  
     console.log('stopTracking');
  
     BackgroundGeolocation.finish();
